@@ -8,11 +8,8 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import models.Profesor;
 
 /**
  *
@@ -42,9 +39,7 @@ public class ProfesorDAOMySQL implements ProfesorDAO{
     public void get_profesorInfo(String nombre, String apellido, String correo) {
         
      try(var pst = conexion.prepareStatement(datosProfesor)){
-            
-             System.out.println("Datos del profesor: ");
-            
+
             ResultSet resultado = pst.executeQuery();
             
            while(resultado.next()){

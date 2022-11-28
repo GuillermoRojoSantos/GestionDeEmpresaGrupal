@@ -21,7 +21,7 @@ public class Alumno implements Serializable {
 
     private int id_alumno;
     private String nombre;
-    private String apelidos;
+    private String apellidos;
     private Integer edad;
     private String contraseña;
     private String DNI;

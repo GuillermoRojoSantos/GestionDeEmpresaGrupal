@@ -18,11 +18,11 @@ import lombok.ToString;
 @NoArgsConstructor
 @ToString
 public class Tarea {
-
+               
     private int id_tarea;
     private String fecha;
     private String tipo;
-    private String totalHoras;
+    private double totalHoras;
     private String actividad;
     private String observaciones;
     private int id_alumno;

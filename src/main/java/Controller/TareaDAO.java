@@ -17,9 +17,9 @@ public interface TareaDAO {
     
     ArrayList<Tarea> get_TareaByAlumno(int id_alumno);
     
-    void new_Tarea();
+    void new_Tarea(String fecha,String tipo,double totalHoras,String actividad,String observaciones, int id_alumno);
 
-    void update_Tarea(String fecha,String tipo,String totalHoras,String actividad,String observaciones);
+    void update_Tarea(String fecha,String tipo,double totalHoras,String actividad,String observaciones, int id_alumno);
 
     void delete_Tarea(int id_tarea);
     

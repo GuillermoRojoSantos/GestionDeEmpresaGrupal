@@ -63,14 +63,6 @@ public class EmpresaDAOMySQL implements EmpresaDAO {
             pst.setString(4, empresa.getResponsable());
             pst.setString(5, empresa.getObservaciones());
             
-             if (pst.executeUpdate() > 0) {
-
-                var keys = pst.getGeneratedKeys();
-                keys.next();
-
-                empresa.setId_empresa(keys.getInt(1));
-            }
-
         } catch (SQLException ex) {
             Logger.getLogger(EmpresaDAOMySQL.class.getName()).log(Level.SEVERE, null, ex);
         }

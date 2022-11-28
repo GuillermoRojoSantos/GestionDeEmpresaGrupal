@@ -4,7 +4,7 @@
  */
 package Controller;
 
-import models.Alumno;
+
 import models.Empresa;
 import models.Profesor;
 
@@ -14,13 +14,13 @@ import models.Profesor;
  */
 public interface AlumnoDAO {
     
-    String get_horasDual();
+    void get_horasDual();
     
-    String get_horasFCT();
+    void get_horasFCT();
 
     void new_alumno(String nombre, String apellido,String contraseña,
-    String dni, String fechaN, String email, int telefono, String empresa,
-    String profesor, double horasTotalesDual, double horasTotalesFCT,
+    String dni, String fechaN, String email, int telefono, Empresa empresa,
+    Profesor profesor, double horasTotalesDual, double horasTotalesFCT,
     String observaciones);
     
     void up_alumno(String nombre, String apellido,String contraseña,
@@ -28,15 +28,12 @@ public interface AlumnoDAO {
     String profesor, double horasTotalesDual, double horasTotalesFCT,
     String observaciones);
     
-    void del_alumno(String nombre, String apellido,String contraseña,
-    String dni, String fechaN, String email, int telefono, String empresa,
-    String profesor, double horasTotalesDual, double horasTotalesFCT,
-    String observaciones);
+    void del_alumno(int id_alumno);
     
     void alumno_empresa(int id_alumno, String empresa);
     
-    void alumnolist(String nombre, String apellido,String contraseña,
-    String dni, String fechaN, String email, int telefono, String empresa,
-    String profesor, double horasTotalesDual, double horasTotalesFCT,
-    String observaciones, int id_profesor);
+    void alumnolist(String nombre, String apellido,String dni, String fechaN, 
+    String email, int telefono, Empresa empresa,Profesor profesor, 
+    double horasTotalesDual, double horasTotalesFCT, String observaciones, 
+    int id_profesor);
 }
