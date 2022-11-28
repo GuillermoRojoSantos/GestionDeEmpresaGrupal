@@ -13,7 +13,7 @@ public class Empresa implements Serializable{
     private String nombre;
     private int telefono;
     private String correo;
-    private String respondable;
+    private String responsable;
     private String observaciones;
 
     public Empresa() {
@@ -43,12 +43,12 @@ public class Empresa implements Serializable{
         this.correo = correo;
     }
 
-    public String getRespondable() {
-        return respondable;
+    public String getResponsable() {
+        return responsable;
     }
 
-    public void setRespondable(String respondable) {
-        this.respondable = respondable;
+    public void setResponsable(String responsable) {
+        this.responsable = responsable;
     }
 
     public String getObservaciones() {
@@ -61,8 +61,7 @@ public class Empresa implements Serializable{
 
     @Override
     public String toString() {
-        return "Empresa{" + "nombre=" + nombre + ", telefono=" + telefono + ", correo=" + correo + ", respondable=" + respondable + ", observaciones=" + observaciones + '}';
+        return "Empresa{" + "nombre=" + nombre + ", telefono=" + telefono + ", correo=" + correo + ", responsable=" + responsable + ", observaciones=" + observaciones + '}';
     }
-    
     
 }

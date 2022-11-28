@@ -22,6 +22,8 @@ public class Alumno implements Serializable {
     
     private String DNI;
     
+    private String fechaN;
+
     private String correo;
     
     private Integer telefono;
@@ -134,6 +136,15 @@ public class Alumno implements Serializable {
     public void setObservaciones(String observaciones) {
         this.observaciones = observaciones;
     }
+    
+     public String getFechaN() {
+        return fechaN;
+    }
+
+    public void setFechaN(String fechaN) {
+        this.fechaN = fechaN;
+    }
+    
 
     @Override
     public String toString() {
