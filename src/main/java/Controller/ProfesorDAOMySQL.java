@@ -32,22 +32,21 @@ public class ProfesorDAOMySQL implements ProfesorDAO{
     
     private static Connection conexion;
     
-     public static final String datosProfesor = "SELECT profesor.Nombre, profesor.Apellido, profesor.Correo FROM "
-     + "`alumno`,`profesor` WHERE alumno.Profesor = '?' and alumno.id = '?';";
+     public static final String datosProfesor = "SELECT * FROM `profesor` WHERE `id_profesor` = ?;";
 
     @Override
-    public void get_profesorInfo(String nombre, String apellido, String correo) {
+    public void get_profesorInfo(int id_profesor) {
         
      try(var pst = conexion.prepareStatement(datosProfesor)){
 
+             pst.setInt(1,id_profesor);
             ResultSet resultado = pst.executeQuery();
-            
-           while(resultado.next()){
-               
 
+           while(resultado.next()){
                System.out.println(resultado.getString("Nombre") 
                + " " + resultado.getString("Apellido")
-               + " " + resultado.getInt("Correo"));
+               + " " + resultado.getString("Correo")
+               + " " + resultado.getString("contraseña"));
             }
         }   
         catch (SQLException ex) {

@@ -19,7 +19,7 @@ public interface TareaDAO {
     
     void new_Tarea(String fecha,String tipo,double totalHoras,String actividad,String observaciones, int id_alumno);
 
-    void update_Tarea(String fecha,String tipo,double totalHoras,String actividad,String observaciones, int id_alumno);
+    void update_Tarea(int id_tarea, String fecha,String tipo,double totalHoras,String actividad,String observaciones);
 
     void delete_Tarea(int id_tarea);
     

@@ -35,19 +35,17 @@ public class EmpresaDAOMySQL implements EmpresaDAO {
     }
       private static Connection conexion;
       
-     public static final String nueva_empresa = "INSERT INTO `empresa` (`Nombre`, `Telefono`, "
-     + "`Email`, `Responsable`, `Observaciones`) VALUES ( ?, ?, ?, ?, ?);";
+     public static final String nueva_empresa = "INSERT INTO `empresa` (`nombre`, `telefono`, "
+     + "`correo`, `responsable`, `observaciones`) VALUES ( ?, ?, ?, ?, ?);";
     
      public static final String mod_empresa = "";
     
-     public static final String datosEmpresa =  "SELECT empresa.Nombre, empresa.Email,"
-     + " empresa.Responsable, empresa.Observacion FROM `alumno`,`empresa`"
-     + " WHERE empresa.Nombre = alumno.Empresa and alumno.id = '?';";
+     public static final String datosEmpresa =  "SELECT * FROM `empresa` WHERE nombre = ?;";
     
     @Override
     public void new_empresa(String nombre, int telefono, String email, String responsable, String observaciones) {
         
-        try (var pst = conexion.prepareStatement(nueva_empresa, RETURN_GENERATED_KEYS)) {
+        try (var pst = conexion.prepareStatement(nueva_empresa)) {
             
             var empresa = new Empresa();
             
@@ -62,6 +60,8 @@ public class EmpresaDAOMySQL implements EmpresaDAO {
             pst.setString(3, empresa.getCorreo());
             pst.setString(4, empresa.getResponsable());
             pst.setString(5, empresa.getObservaciones());
+
+            pst.executeUpdate();
             
         } catch (SQLException ex) {
             Logger.getLogger(EmpresaDAOMySQL.class.getName()).log(Level.SEVERE, null, ex);
@@ -69,20 +69,21 @@ public class EmpresaDAOMySQL implements EmpresaDAO {
     }
 
     @Override
-    public void get_info(String nombre, int telefono, String email, String responsable, String observaciones) {
+    public void get_info(String nombre) {
         try(var pst = conexion.prepareStatement(datosEmpresa)){
+            pst.setString(1,nombre);
 
              System.out.println("Datos de la empresa: ");
             
             ResultSet resultado = pst.executeQuery();
-            
-           while(resultado.next()){
-          
-               System.out.println(resultado.getString("Nombre") 
-               + " " + resultado.getString("Email")
-               + " " + resultado.getInt("Responsable")
-               + " " + resultado.getInt("Observacion"));
-            }
+          while (resultado.next()){
+              System.out.println(resultado.getString("nombre")
+                      + " " + resultado.getString("telefono")
+                      + " " + resultado.getString("correo")
+                      + " " + resultado.getString("responsable")
+                      + " " + resultado.getString("observaciones"));
+          }
+
         }   
         catch (SQLException ex) {
             Logger.getLogger(EmpresaDAOMySQL.class.getName()).log(Level.SEVERE, null, ex);

@@ -13,7 +13,7 @@ import models.Profesor;
  */
 public interface ProfesorDAO {
       
-    void get_profesorInfo(String nombre, String apellido, String correo);
+    void get_profesorInfo(int id_profesor);
 
     
 }

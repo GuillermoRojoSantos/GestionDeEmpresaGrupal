@@ -22,14 +22,13 @@ public class Alumno implements Serializable {
     private int id_alumno;
     private String nombre;
     private String apellidos;
-    private Integer edad;
     private String contraseña;
     private String DNI;
     private String fechaN;
     private String correo;
     private Integer telefono;
-    private Empresa empresa;
-    private Profesor profesor;
+    private String empresa;
+    private String profesor;
     private double horasTotalesDual;
     private double horasTotalesFCT;
     private String observaciones;
