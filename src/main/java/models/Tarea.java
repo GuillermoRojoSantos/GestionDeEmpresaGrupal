@@ -4,59 +4,26 @@
  */
 package models;
 
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
+
 /**
  *
  * @author AlejandroMarínBermúd
  */
+@Getter
+@Setter
+@NoArgsConstructor
+@ToString
 public class Tarea {
-    
+
+    private int id_tarea;
     private String fecha;
     private String tipo;
+    private String totalHoras;
     private String actividad;
     private String observaciones;
-
-    public String getFecha() {
-        return fecha;
-    }
-
-    public void setFecha(String fecha) {
-        this.fecha = fecha;
-    }
-
-    public String getTipo() {
-        return tipo;
-    }
-
-    public void setTipo(String tipo) {
-        this.tipo = tipo;
-    }
-
-    public String getActividad() {
-        return actividad;
-    }
-
-    public void setActividad(String actividad) {
-        this.actividad = actividad;
-    }
-
-    public String getObservaciones() {
-        return observaciones;
-    }
-
-    public void setObservaciones(String observaciones) {
-        this.observaciones = observaciones;
-    }
-
-    @Override
-    public String toString() {
-        return "Tareas{" + "fecha=" + fecha + ", tipo=" + tipo + ", actividad=" + actividad + ", observaciones=" + observaciones + '}';
-    } 
-
-    public void setHorasTotalesDual(double total) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-    public void setHorasTotalesFCT(double total) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
+    private int id_alumno;
 }

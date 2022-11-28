@@ -46,10 +46,8 @@ public class EmpresaDAOMySQL implements EmpresaDAO {
     
     @Override
     public void new_empresa(Empresa e) {
-        
         try (var pst = conexion.prepareStatement(nueva_empresa, RETURN_GENERATED_KEYS)) {
             Scanner sci = new Scanner(System.in);    
-            
 
             System.out.println("nombre");
             String nombre = sci.nextLine();

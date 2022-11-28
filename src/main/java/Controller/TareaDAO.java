@@ -4,6 +4,10 @@
  */
 package Controller;
 
+import models.Tarea;
+
+import java.util.ArrayList;
+
 /**
  *
  * @author AlejandroMarínBermúd
@@ -11,11 +15,13 @@ package Controller;
 public interface TareaDAO {
     
     
-    String get_entrada();
+    ArrayList<Tarea> get_TareaByAlumno(int id_alumno);
     
-    void new_Entrada();
+    void new_Tarea();
+
+    void update_Tarea(String fecha,String tipo,String totalHoras,String actividad,String observaciones);
+
+    void delete_Tarea(int id_tarea);
     
-    String up_Entrada();
-    
-    String del_Entrada();
+
 }
