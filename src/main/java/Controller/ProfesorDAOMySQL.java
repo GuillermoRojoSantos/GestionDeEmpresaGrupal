@@ -39,7 +39,7 @@ public class ProfesorDAOMySQL implements ProfesorDAO{
      + "`alumno`,`profesor` WHERE alumno.Profesor = '?' and alumno.id = '?';";
 
     @Override
-    public void get_profesorInfo(Profesor P) {
+    public void get_profesorInfo(String nombre, String apellido, String correo) {
         
      try(var pst = conexion.prepareStatement(datosProfesor)){
             

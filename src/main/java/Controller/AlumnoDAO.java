@@ -18,13 +18,25 @@ public interface AlumnoDAO {
     
     String get_horasFCT();
 
-    void new_alumno(Alumno a);
+    void new_alumno(String nombre, String apellido,String contraseña,
+    String dni, String fechaN, String email, int telefono, String empresa,
+    String profesor, double horasTotalesDual, double horasTotalesFCT,
+    String observaciones);
     
-    void up_alumno(Alumno a);
+    void up_alumno(String nombre, String apellido,String contraseña,
+    String dni, String fechaN, String email, int telefono, String empresa,
+    String profesor, double horasTotalesDual, double horasTotalesFCT,
+    String observaciones);
     
-    void del_alumno(Alumno a);
+    void del_alumno(String nombre, String apellido,String contraseña,
+    String dni, String fechaN, String email, int telefono, String empresa,
+    String profesor, double horasTotalesDual, double horasTotalesFCT,
+    String observaciones);
     
-    void alumno_empresa(Alumno a, Empresa p);
+    void alumno_empresa(int id_alumno, String empresa);
     
-    void alumnolist(Profesor p);
+    void alumnolist(String nombre, String apellido,String contraseña,
+    String dni, String fechaN, String email, int telefono, String empresa,
+    String profesor, double horasTotalesDual, double horasTotalesFCT,
+    String observaciones, int id_profesor);
 }

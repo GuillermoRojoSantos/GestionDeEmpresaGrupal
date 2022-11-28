@@ -13,9 +13,9 @@ import models.Empresa;
  */
 public interface EmpresaDAO {
     
-    void new_empresa(Empresa e);
+    void new_empresa(String nombre, int telefono, String email, String responsable, String observaciones);
     
-    void get_info(Empresa e);
+    void get_info(String nombre, int telefono, String email, String responsable, String observaciones);
     
-    void up_empresa(Empresa e);
+    void up_empresa(String nombre, int telefono, String email, String responsable, String observaciones);
 }

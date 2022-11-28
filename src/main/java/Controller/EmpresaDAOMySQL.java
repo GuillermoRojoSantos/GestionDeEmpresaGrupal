@@ -45,44 +45,39 @@ public class EmpresaDAOMySQL implements EmpresaDAO {
      + " WHERE empresa.Nombre = alumno.Empresa and alumno.id = '?';";
     
     @Override
-    public void new_empresa(Empresa e) {
+    public void new_empresa(String nombre, int telefono, String email, String responsable, String observaciones) {
+        
         try (var pst = conexion.prepareStatement(nueva_empresa, RETURN_GENERATED_KEYS)) {
-            Scanner sci = new Scanner(System.in);    
+            
+            var empresa = new Empresa();
+            
+            empresa.setNombre(nombre);
+            empresa.setCorreo(email);
+            empresa.setTelefono(telefono);
+            empresa.setResponsable(responsable);
+            empresa.setObservaciones(observaciones);
+           
+            pst.setString(1, empresa.getNombre());
+            pst.setInt(2, empresa.getTelefono());
+            pst.setString(3, empresa.getCorreo());
+            pst.setString(4, empresa.getResponsable());
+            pst.setString(5, empresa.getObservaciones());
+            
+             if (pst.executeUpdate() > 0) {
 
-            System.out.println("nombre");
-            String nombre = sci.nextLine();
-            e.setNombre(nombre);
+                var keys = pst.getGeneratedKeys();
+                keys.next();
 
-            System.out.println("Introduce un telefono");
-            int telefono = sci.nextInt();
-            e.setTelefono(telefono);
-
-            System.out.println("Introduce un email");
-            String email = sci.next().toUpperCase();
-            e.setCorreo(email);
-
-            System.out.println("Introduce un Responsable");
-            String responsable = sci.nextLine();
-            e.setResponsable(responsable);
-
-            System.out.println("Introduce una observacion");
-            String observacion = sci.nextLine();
-            e.setObservaciones(observacion);
-
-            pst.setString(1, e.getNombre());
-            pst.setInt(2, e.getTelefono());
-            pst.setString(3, e.getCorreo());
-            pst.setString(4, e.getResponsable());
-            pst.setString(5, e.getObservaciones());
+                empresa.setId_empresa(keys.getInt(1));
+            }
 
         } catch (SQLException ex) {
             Logger.getLogger(EmpresaDAOMySQL.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
-
     @Override
-    public void get_info(Empresa e) {
+    public void get_info(String nombre, int telefono, String email, String responsable, String observaciones) {
         try(var pst = conexion.prepareStatement(datosEmpresa)){
 
              System.out.println("Datos de la empresa: ");
@@ -90,8 +85,7 @@ public class EmpresaDAOMySQL implements EmpresaDAO {
             ResultSet resultado = pst.executeQuery();
             
            while(resultado.next()){
-                
-
+          
                System.out.println(resultado.getString("Nombre") 
                + " " + resultado.getString("Email")
                + " " + resultado.getInt("Responsable")
@@ -104,7 +98,7 @@ public class EmpresaDAOMySQL implements EmpresaDAO {
     }
 
     @Override
-    public void up_empresa(Empresa e) {
+    public void up_empresa(String nombre, int telefono, String email, String responsable, String observaciones) {
         throw new UnsupportedOperationException("Not supported yet."); 
     }
     

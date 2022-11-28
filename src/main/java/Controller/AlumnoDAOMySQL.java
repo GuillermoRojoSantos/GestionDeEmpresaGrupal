@@ -71,24 +71,36 @@ public class AlumnoDAOMySQL implements AlumnoDAO {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
-    public void new_alumno(Alumno a) {
+    public void new_alumno(String nombre, String apellido,String contraseña,
+    String dni, String fechaN, String email, int telefono, String empresa,
+    String profesor, double horasTotalesDual, double horasTotalesFCT,
+    String observaciones) {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
-    public void up_alumno(Alumno a) {
+    public void up_alumno(String nombre, String apellido,String contraseña,
+    String dni, String fechaN, String email, int telefono, String empresa,
+    String profesor, double horasTotalesDual, double horasTotalesFCT,
+    String observaciones) {
         throw new UnsupportedOperationException("Not supported yet."); 
     }
 
-    public void del_alumno(Alumno a) {
+    public void del_alumno(String nombre, String apellido,String contraseña,
+    String dni, String fechaN, String email, int telefono, String empresa,
+    String profesor, double horasTotalesDual, double horasTotalesFCT,
+    String observaciones) {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
-    public void alumno_empresa(Alumno a, Empresa p) {
+    public void alumno_empresa(int id_alumno, String empresa) {
         throw new UnsupportedOperationException("Not supported yet."); 
     }
 
     @Override
-    public void alumnolist(Profesor p) {
+    public void alumnolist(String nombre, String apellido,String contraseña,
+    String dni, String fechaN, String email, int telefono, String empresa,
+    String profesor, double horasTotalesDual, double horasTotalesFCT,
+    String observaciones, int id_profesor) {
         throw new UnsupportedOperationException("Not supported yet.");
     }
     
