@@ -4,13 +4,10 @@
  */
 package Controller;
 
-import static Controller.ProfesorDAOMySQL.datosProfesor;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import static java.sql.Statement.RETURN_GENERATED_KEYS;
-import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import models.Empresa;
@@ -38,7 +35,9 @@ public class EmpresaDAOMySQL implements EmpresaDAO {
      public static final String nueva_empresa = "INSERT INTO `empresa` (`nombre`, `telefono`, "
      + "`correo`, `responsable`, `observaciones`) VALUES ( ?, ?, ?, ?, ?);";
     
-     public static final String mod_empresa = "";
+     public static final String mod_empresa = "UPDATE `empresa` SET"
+            + "`nombre`= ?,`telefono`= ?, `correo`= ?, `responsable`= ?,"
+            + "`observaciones`= ?";
     
      public static final String datosEmpresa =  "SELECT * FROM `empresa` WHERE nombre = ?;";
     
@@ -92,7 +91,18 @@ public class EmpresaDAOMySQL implements EmpresaDAO {
 
     @Override
     public void up_empresa(String nombre, int telefono, String email, String responsable, String observaciones) {
-        throw new UnsupportedOperationException("Not supported yet."); 
+      
+        try (var pst = conexion.prepareStatement(mod_empresa)) {
+            pst.setString(1, nombre);
+            pst.setInt(2, telefono);
+            pst.setString(3, email);
+            pst.setString(4, responsable);
+            pst.setString(5, observaciones);
+
+            pst.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } 
     }
     
 }

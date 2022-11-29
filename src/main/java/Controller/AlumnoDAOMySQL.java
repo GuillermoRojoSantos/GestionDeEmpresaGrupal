@@ -45,23 +45,23 @@ public class AlumnoDAOMySQL implements AlumnoDAO {
 
     public static final String listadoporprofesor = "SELECT * FROM `alumno` WHERE Profesor = '?;";
 
-    public static final String horasDual = "SELECT horasTotalesDual as HorasAc,"
-            + "(360-horasTotalesDual) as horasR FROM `alumno` WHERE id_alumno = '?';";
-    //Hay que actualizar estas dos consultas por que deberia calcularse con una suma de horas hechas en las actividades realizadas
-    //Ejemplo alumno "A" ha realizado 3 actividades, en ellas a realizado 3, 7 y 10 horas, (20 horas en total) 360-20  = 340 horas restantes
-    //Tambien es cierto que no se scuantas horas se deben de realizar por lo que 360 esa un numero arbitrario habria que cambiarlo
-    public static final String horasFCT = "SELECT horasTotalesFCT as HorasAc,"
-            + "(360-horasTotalesFCT) as horasR FROM `alumno` WHERE id_alumno = '?';";
+    public static final String horasDual = "SELECT sum(total) as Horas_Dual FROM"
+    + " tarea, alumno where tarea.tipo ='Dual' and alumno.id = tarea.id_alumno "
+    + "and alumno.id = ?;";
+   
+    public static final String horasFCT = "SELECT sum(total) as Horas_FCT FROM"
+   + "tarea, alumno where tarea.tipo ='FCT' and alumno.id = tarea.id_alumno "
+   + "and alumno.id = ?;";
 
     public static final String nuevoAlumno = "INSERT INTO `alumno` "
             + "(`id_alumno`, `nombre`, `apellidos`, `contraseña`, `dni`, `fechaN`, `correo`, "
-            + "`telefono`, `empresa`, `profesor`, `horasTotalesDual`, `horasTotalesFCT`, `observaciones`)"
-            + " VALUES (NULL, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
+            + "`telefono`, `empresa`, `profesor`, `observaciones`)"
+            + " VALUES (NULL, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
 
     public static final String modificarAlumno = "UPDATE `alumno` SET"
             + "`nombre`= ?,`apellidos`= ?, `contraseña`= ?, `dni`= ?,"
             + "`fechaN`= ?, `correo`= ?, `telefono`= ?,`empresa`= ?,"
-            + "`profesor`= ?, `horasTotalesDual`=?, `horasTotalesFCT`= ?, `observaciones`= ?";
+            + "`profesor`= ?, `observaciones`= ?";
 
     public static final String borrarAlumno = "DELETE FROM alumno WHERE"
             + " `id_alumno` = ?";
@@ -70,39 +70,9 @@ public class AlumnoDAOMySQL implements AlumnoDAO {
             + " = ? WHERE `id_alumno` = ?;";
 
 
-    public void get_horasDual(int id_alumno) {
-
-        try (var pst = conexion.prepareStatement(horasDual)) {
-
-            ResultSet resultado = pst.executeQuery();
-
-            while (resultado.next()) {
-
-                System.out.println(resultado.getDouble("horasR"));
-            }
-        } catch (SQLException ex) {
-            Logger.getLogger(ProfesorDAOMySQL.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
-
-    public void get_horasFCT(int id_alumno) {
-        try (var pst = conexion.prepareStatement(horasFCT)) {
-
-            ResultSet resultado = pst.executeQuery();
-
-            while (resultado.next()) {
-
-                System.out.println(resultado.getDouble("horasR"));
-            }
-        } catch (SQLException ex) {
-            Logger.getLogger(ProfesorDAOMySQL.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
-
     public void new_alumno(String nombre, String apellido, String contraseña,
-                           String dni, String fechaN, String email, int telefono, Empresa empresa,
-                           Profesor profesor, double horasTotalesDual, double horasTotalesFCT,
-                           String observaciones) {
+                           String dni, String fechaN, String email, int telefono,
+                           Empresa empresa, Profesor profesor, String observaciones) {
         try (var pst = conexion.prepareStatement(nuevoAlumno, RETURN_GENERATED_KEYS)) {
             var alumno = new Alumno();
 
@@ -115,8 +85,6 @@ public class AlumnoDAOMySQL implements AlumnoDAO {
             alumno.setTelefono(telefono);
             alumno.setEmpresa(empresa.getNombre());
             alumno.setProfesor(profesor.getNombre());
-            alumno.setHorasTotalesDual(horasTotalesDual);
-            alumno.setHorasTotalesFCT(horasTotalesFCT);
             alumno.setObservaciones(observaciones);
 
             pst.setString(1, alumno.getNombre());
@@ -128,9 +96,7 @@ public class AlumnoDAOMySQL implements AlumnoDAO {
             pst.setInt(7, alumno.getTelefono());
             pst.setString(8, alumno.getEmpresa());
             pst.setString(9, alumno.getProfesor());
-            pst.setDouble(10, alumno.getHorasTotalesDual());
-            pst.setDouble(11, alumno.getHorasTotalesFCT());
-            pst.setString(12, alumno.getObservaciones());
+            pst.setString(10, alumno.getObservaciones());
 
             if (pst.executeUpdate() > 0) {
 
@@ -145,9 +111,8 @@ public class AlumnoDAOMySQL implements AlumnoDAO {
     }
 
     public void up_alumno(String nombre, String apellido, String contraseña,
-                          String dni, String fechaN, String email, int telefono, String empresa,
-                          String profesor, double horasTotalesDual, double horasTotalesFCT,
-                          String observaciones) {
+                          String dni, String fechaN, String email, int telefono, 
+                          String empresa,String profesor, String observaciones){
 
         try (var pst = conexion.prepareStatement(modificarAlumno)) {
             pst.setString(1, nombre);
@@ -159,9 +124,7 @@ public class AlumnoDAOMySQL implements AlumnoDAO {
             pst.setInt(7, telefono);
             pst.setString(8, empresa);
             pst.setString(9, profesor);
-            pst.setDouble(10, horasTotalesDual);
-            pst.setDouble(11, horasTotalesFCT);
-            pst.setString(12, observaciones);
+            pst.setString(10, observaciones);
             pst.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -193,8 +156,7 @@ public class AlumnoDAOMySQL implements AlumnoDAO {
     public ArrayList<Alumno> alumnolist
             (String nombre, String apellido, String dni,
              String fechaN, String email, int telefono, String empresa, String profesor,
-             double horasTotalesDual, double horasTotalesFCT, String observaciones,
-             int id_profesor) {
+             String observaciones, int id_profesor) {
 
         var resultado = new ArrayList<Alumno>();
         try (var pst = conexion.prepareStatement(listadoporprofesor)) {
@@ -210,8 +172,6 @@ public class AlumnoDAOMySQL implements AlumnoDAO {
                 alumno.setTelefono(resultSet.getInt("telefono"));
                 alumno.setEmpresa(resultSet.getString("empresa"));
                 alumno.setProfesor(resultSet.getString("profesor"));
-                alumno.setHorasTotalesDual(resultSet.getDouble("horasTotalesDual"));
-                alumno.setHorasTotalesFCT(resultSet.getDouble("horasTotalesFCT"));
                 alumno.setObservaciones(resultSet.getString("observaciones"));
 
                 resultado.add(alumno);
@@ -239,8 +199,6 @@ public class AlumnoDAOMySQL implements AlumnoDAO {
                 alumno.setTelefono(resultSet.getInt("telefono"));
                 alumno.setEmpresa(resultSet.getString("empresa"));
                 alumno.setProfesor(resultSet.getString("profesor"));
-                alumno.setHorasTotalesDual(resultSet.getDouble("horasTotalesDual"));
-                alumno.setHorasTotalesFCT(resultSet.getDouble("horasTotalesFCT"));
                 alumno.setObservaciones(resultSet.getString("observaciones"));
             }
         }catch (SQLException e) {
@@ -248,4 +206,46 @@ public class AlumnoDAOMySQL implements AlumnoDAO {
         }
         return alumno;
     }
+
+    @Override
+    public double horasDual(int id_alumno) {
+        
+        double horas = 0;
+         try(var pst = conexion.prepareStatement(horasDual)){
+        
+             ResultSet resultSet = pst.executeQuery();
+             
+             horas = resultSet.getDouble("Horas_Dual");
+             
+         } catch (SQLException ex) {
+            Logger.getLogger(AlumnoDAOMySQL.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        
+        return horas;   
+    }
+
+    //Tanto horasDual y horasFCT necesitamos hacer que se pueda ver junto el alumno (en el arraylist y el by id)
+    
+    @Override
+    public double horasFCT(int id_alumno) {
+        
+        double horas = 0;
+        
+         try(var pst = conexion.prepareStatement(horasDual)){
+        
+             ResultSet resultSet = pst.executeQuery();
+             
+             horas = resultSet.getDouble("Horas_FCT");
+         } catch (SQLException ex) {
+            Logger.getLogger(AlumnoDAOMySQL.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        return horas;  
+    }
+    
+    
+    
+    
+    
 }

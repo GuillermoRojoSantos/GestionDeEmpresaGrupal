@@ -29,8 +29,6 @@ public class Alumno implements Serializable {
     private Integer telefono;
     private String empresa;
     private String profesor;
-    private double horasTotalesDual;
-    private double horasTotalesFCT;
     private String observaciones;
     
     

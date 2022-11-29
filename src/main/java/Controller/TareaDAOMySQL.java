@@ -24,13 +24,18 @@ public class TareaDAOMySQL implements TareaDAO {
     private static final String PASSWORD = "";
     private static final String URL ="jdbc:mysql://localhost:3306/trabajogrupo?zeroDateTimeBehavior=CONVERT_TO_NULL";
     private static Connection conexion;
+    
     private static final String get_TareaByAlumno ="SELECT * FROM `tarea` WHERE id_alumno = ?;";
+    
     public static final String add_tarea  ="INSERT INTO `tarea` (`fecha`, "
             + "`tipo`, `totalHoras`, `actividad`, `observaciones`, `id_alumno`) VALUES "
             + "(?, ?, ?, ?, ?, ?);";
+    
     public static final String up_actividad = "UPDATE `tarea` SET `fecha` = ?, `tipo` = ?, " +
             "`totalHoras` = ?, `actividad` = ?, `observaciones` = ? WHERE `id_tarea` = ?;";
+    
     public static final String del_actividad = "DELETE FROM tarea WHERE `id_tarea`= ?";
+    
     static {
         try {
             conexion = DriverManager.getConnection(URL, USER, PASSWORD);
