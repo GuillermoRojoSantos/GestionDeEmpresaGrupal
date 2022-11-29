@@ -37,7 +37,7 @@ public class EmpresaDAOMySQL implements EmpresaDAO {
     
      public static final String mod_empresa = "UPDATE `empresa` SET"
             + "`nombre`= ?,`telefono`= ?, `correo`= ?, `responsable`= ?,"
-            + "`observaciones`= ?";
+            + "`observaciones`= ? where `nombre`=?";
     
      public static final String datosEmpresa =  "SELECT * FROM `empresa` WHERE nombre = ?;";
     
@@ -90,7 +90,8 @@ public class EmpresaDAOMySQL implements EmpresaDAO {
     }
 
     @Override
-    public void up_empresa(String nombre, int telefono, String email, String responsable, String observaciones) {
+    public void up_empresa(String empresaObjetivo,String nombre, int telefono, String email, String responsable,
+                           String observaciones) {
       
         try (var pst = conexion.prepareStatement(mod_empresa)) {
             pst.setString(1, nombre);
@@ -98,6 +99,7 @@ public class EmpresaDAOMySQL implements EmpresaDAO {
             pst.setString(3, email);
             pst.setString(4, responsable);
             pst.setString(5, observaciones);
+            pst.setString(6,empresaObjetivo);
 
             pst.executeUpdate();
         } catch (SQLException e) {

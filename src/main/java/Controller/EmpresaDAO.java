@@ -17,5 +17,6 @@ public interface EmpresaDAO {
     
     void get_info(String nombre);
     
-    void up_empresa(String nombre, int telefono, String email, String responsable, String observaciones);
+    void up_empresa(String empresaObjetivo,String nombre, int telefono, String email, String responsable,
+                    String observaciones);
 }

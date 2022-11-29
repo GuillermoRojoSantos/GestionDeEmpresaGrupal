@@ -41,17 +41,17 @@ public class AlumnoDAOMySQL implements AlumnoDAO {
 
     private static Connection conexion;
 
-    public static final String getAlumno = "SELECT * FROM `alumno` WHERE id_alumno = '?;";
+    public static final String getAlumno = "SELECT * FROM `alumno` WHERE id_alumno = ?;";
 
-    public static final String listadoporprofesor = "SELECT * FROM `alumno` WHERE Profesor = '?;";
+    public static final String listadoporprofesor = "SELECT * FROM `alumno` WHERE Profesor = ?;";
 
-    public static final String horasDual = "SELECT sum(total) as Horas_Dual FROM"
-    + " tarea, alumno where tarea.tipo ='Dual' and alumno.id = tarea.id_alumno "
-    + "and alumno.id = ?;";
-   
-    public static final String horasFCT = "SELECT sum(total) as Horas_FCT FROM"
-   + "tarea, alumno where tarea.tipo ='FCT' and alumno.id = tarea.id_alumno "
-   + "and alumno.id = ?;";
+    public static final String horasDual = "SELECT sum(totalHoras) as horasDUAL FROM"
+            + " tarea, alumno where tarea.tipo ='Dual' and alumno.id_alumno = tarea.id_alumno "
+            + "and alumno.id_alumno = ?;";
+
+    public static final String horasFCT = "SELECT sum(totalHoras) as horasFCT FROM"
+            + " tarea, alumno where tarea.tipo ='FCT' and alumno.id_alumno = tarea.id_alumno "
+            + "and alumno.id_alumno = ?;";
 
     public static final String nuevoAlumno = "INSERT INTO `alumno` "
             + "(`id_alumno`, `nombre`, `apellidos`, `contraseña`, `dni`, `fechaN`, `correo`, "
@@ -61,7 +61,7 @@ public class AlumnoDAOMySQL implements AlumnoDAO {
     public static final String modificarAlumno = "UPDATE `alumno` SET"
             + "`nombre`= ?,`apellidos`= ?, `contraseña`= ?, `dni`= ?,"
             + "`fechaN`= ?, `correo`= ?, `telefono`= ?,`empresa`= ?,"
-            + "`profesor`= ?, `observaciones`= ?";
+            + "`profesor`= ?, `observaciones`= ? where id_alumno=?";
 
     public static final String borrarAlumno = "DELETE FROM alumno WHERE"
             + " `id_alumno` = ?";
@@ -110,9 +110,9 @@ public class AlumnoDAOMySQL implements AlumnoDAO {
         }
     }
 
-    public void up_alumno(String nombre, String apellido, String contraseña,
-                          String dni, String fechaN, String email, int telefono, 
-                          String empresa,String profesor, String observaciones){
+    public void up_alumno(int id_AlumnoObjetivo, String nombre, String apellido, String contraseña,
+                          String dni, String fechaN, String email, int telefono,
+                          String empresa, String profesor, String observaciones) {
 
         try (var pst = conexion.prepareStatement(modificarAlumno)) {
             pst.setString(1, nombre);
@@ -125,6 +125,7 @@ public class AlumnoDAOMySQL implements AlumnoDAO {
             pst.setString(8, empresa);
             pst.setString(9, profesor);
             pst.setString(10, observaciones);
+            pst.setInt(11, id_AlumnoObjetivo);
             pst.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -153,14 +154,11 @@ public class AlumnoDAOMySQL implements AlumnoDAO {
     }
 
     @Override
-    public ArrayList<Alumno> alumnolist
-            (String nombre, String apellido, String dni,
-             String fechaN, String email, int telefono, String empresa, String profesor,
-             String observaciones, int id_profesor) {
+    public ArrayList<Alumno> alumnolist(Profesor profesor) {
 
         var resultado = new ArrayList<Alumno>();
         try (var pst = conexion.prepareStatement(listadoporprofesor)) {
-            pst.setInt(1, id_profesor);
+            pst.setString(1, profesor.getNombre());
             ResultSet resultSet = pst.executeQuery();
             while (resultSet.next()) {
                 var alumno = new Alumno();
@@ -186,8 +184,8 @@ public class AlumnoDAOMySQL implements AlumnoDAO {
     @Override
     public Alumno getAlumoById(int id_alumno) {
         var alumno = new Alumno();
-        try(var pst = conexion.prepareStatement(getAlumno)){
-            pst.setInt(1,id_alumno);
+        try (var pst = conexion.prepareStatement(getAlumno)) {
+            pst.setInt(1, id_alumno);
             ResultSet resultSet = pst.executeQuery();
 
             while (resultSet.next()) {
@@ -201,7 +199,7 @@ public class AlumnoDAOMySQL implements AlumnoDAO {
                 alumno.setProfesor(resultSet.getString("profesor"));
                 alumno.setObservaciones(resultSet.getString("observaciones"));
             }
-        }catch (SQLException e) {
+        } catch (SQLException e) {
             e.printStackTrace();
         }
         return alumno;
@@ -209,43 +207,41 @@ public class AlumnoDAOMySQL implements AlumnoDAO {
 
     @Override
     public double horasDual(int id_alumno) {
-        
+
         double horas = 0;
-         try(var pst = conexion.prepareStatement(horasDual)){
-        
-             ResultSet resultSet = pst.executeQuery();
-             
-             horas = resultSet.getDouble("Horas_Dual");
-             
-         } catch (SQLException ex) {
+        try (var pst = conexion.prepareStatement(horasDual)) {
+            pst.setInt(1, id_alumno);
+            ResultSet resultSet = pst.executeQuery();
+            if(resultSet.next()){
+                horas = resultSet.getDouble("horasDUAL");
+            }
+        } catch (SQLException ex) {
             Logger.getLogger(AlumnoDAOMySQL.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
-        
-        return horas;   
+
+
+        return horas;
     }
 
     //Tanto horasDual y horasFCT necesitamos hacer que se pueda ver junto el alumno (en el arraylist y el by id)
-    
+
     @Override
     public double horasFCT(int id_alumno) {
-        
+
         double horas = 0;
-        
-         try(var pst = conexion.prepareStatement(horasDual)){
-        
-             ResultSet resultSet = pst.executeQuery();
-             
-             horas = resultSet.getDouble("Horas_FCT");
-         } catch (SQLException ex) {
+
+        try (var pst = conexion.prepareStatement(horasFCT)) {
+            pst.setInt(1, id_alumno);
+            ResultSet resultSet = pst.executeQuery();
+            if(resultSet.next()){
+                horas = resultSet.getDouble("horasFCT");
+            }
+        } catch (SQLException ex) {
             Logger.getLogger(AlumnoDAOMySQL.class.getName()).log(Level.SEVERE, null, ex);
         }
 
-        return horas;  
+        return horas;
     }
-    
-    
-    
-    
-    
+
+
 }
