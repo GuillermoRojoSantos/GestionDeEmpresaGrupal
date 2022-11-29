@@ -1,0 +1,216 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<VBox alignment="CENTER" maxHeight="664.0" maxWidth="940.0" minHeight="664.0" minWidth="940.0" prefHeight="664.0" prefWidth="940.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.zzfxjgrupo.SecondaryController">
+    <children>
+      <Label text="Cuenta de profesor">
+         <font>
+            <Font size="25.0" />
+         </font>
+      </Label>
+      <TabPane prefHeight="583.0" prefWidth="920.0" tabClosingPolicy="UNAVAILABLE">
+        <tabs>
+          <Tab id="alumnos" fx:id="alumno_list" text="Alumnos">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="533.0" prefWidth="902.0">
+                     <children>
+                        <TableView prefHeight="354.0" prefWidth="908.0">
+                          <columns>
+                            <TableColumn prefWidth="106.0" text="Nombre" />
+                            <TableColumn prefWidth="68.0" text="Apellidos" />
+                              <TableColumn prefWidth="115.0" text="DNI" />
+                              <TableColumn minWidth="8.0" prefWidth="115.0" text="Fecha nacimiento" />
+                              <TableColumn minWidth="0.0" prefWidth="115.0" text="Correo" />
+                              <TableColumn minWidth="0.0" prefWidth="0.0" text="Telefono" />
+                              <TableColumn minWidth="0.0" prefWidth="179.0" text="Empresa" />
+                              <TableColumn prefWidth="76.0" text="Profesor" />
+                              <TableColumn prefWidth="137.0" text="Observaciones" />
+                          </columns>
+                        </TableView>
+                        <GridPane layoutX="6.0" layoutY="354.0" prefHeight="125.0" prefWidth="890.0">
+                          <columnConstraints>
+                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="454.0" minWidth="10.0" prefWidth="71.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="454.0" minWidth="10.0" prefWidth="338.0" />
+                            <ColumnConstraints hgrow="SOMETIMES" maxWidth="454.0" minWidth="10.0" prefWidth="121.0" />
+                            <ColumnConstraints hgrow="SOMETIMES" maxWidth="482.0" minWidth="10.0" prefWidth="364.0" />
+                          </columnConstraints>
+                          <rowConstraints>
+                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                          </rowConstraints>
+                           <children>
+                              <Label prefHeight="17.0" prefWidth="46.0" text="Nombre" />
+                              <TextField fx:id="alumno_nombre" prefHeight="25.0" prefWidth="304.0" GridPane.columnIndex="1" />
+                              <Label text="Apellido" GridPane.columnIndex="2">
+                                 <GridPane.margin>
+                                    <Insets left="20.0" />
+                                 </GridPane.margin>
+                              </Label>
+                              <TextField fx:id="alumno_apellido" prefHeight="25.0" prefWidth="161.0" GridPane.columnIndex="3" />
+                              <Label text="DNI" GridPane.rowIndex="1" />
+                              <TextField fx:id="alumno_dni" prefHeight="25.0" prefWidth="161.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                              <Label prefHeight="17.0" prefWidth="107.0" text="Fecha nacimiento" GridPane.columnIndex="2" GridPane.rowIndex="1">
+                                 <GridPane.margin>
+                                    <Insets left="20.0" />
+                                 </GridPane.margin>
+                              </Label>
+                              <TextField fx:id="alumno_profesor" prefHeight="25.0" prefWidth="169.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                              <Label text="Correo" GridPane.columnIndex="2" GridPane.rowIndex="2">
+                                 <GridPane.margin>
+                                    <Insets left="20.0" />
+                                 </GridPane.margin>
+                              </Label>
+                              <TextField fx:id="alumno_observaciones" prefHeight="25.0" prefWidth="161.0" GridPane.columnIndex="3" GridPane.rowIndex="3" />
+                              <Label text="Empresa" GridPane.rowIndex="2" />
+                              <Label prefHeight="17.0" prefWidth="72.0" text="Profesor" GridPane.rowIndex="3" />
+                              <Label text="Observaciones" GridPane.columnIndex="2" GridPane.rowIndex="3">
+                                 <GridPane.margin>
+                                    <Insets left="20.0" top="10.0" />
+                                 </GridPane.margin>
+                              </Label>
+                              <TextField fx:id="alumno_empresa" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                              <TextField fx:id="alumno_fecha" GridPane.columnIndex="3" GridPane.rowIndex="1" />
+                              <TextField fx:id="alumno_correo" GridPane.columnIndex="3" GridPane.rowIndex="2" />
+                           </children>
+                        </GridPane>
+                        <HBox alignment="CENTER" layoutX="5.0" layoutY="480.0" prefHeight="70.0" prefWidth="893.0" spacing="50.0">
+                           <children>
+                              <Button fx:id="alumno_introducir" mnemonicParsing="false" prefHeight="25.0" prefWidth="107.0" text="Introducir" />
+                              <Button fx:id="alumno_borrar" mnemonicParsing="false" prefHeight="25.0" prefWidth="99.0" text="Borrar" />
+                              <Button fx:id="alumno_modificar" mnemonicParsing="false" prefHeight="25.0" prefWidth="105.0" text="Modificar" />
+                           </children>
+                        </HBox>
+                     </children>
+                  </AnchorPane>
+            </content>
+          </Tab>
+          <Tab id="empresa" fx:id="empresa_list" text="Empresa">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <TableView prefHeight="386.0" prefWidth="902.0">
+                          <columns>
+                            <TableColumn prefWidth="151.0" text="Nombre" />
+                            <TableColumn prefWidth="141.0" text="Telefono" />
+                              <TableColumn prefWidth="229.0" text="Correo" />
+                              <TableColumn prefWidth="129.0" text="Responsable" />
+                              <TableColumn prefWidth="251.0" text="Observaciones" />
+                          </columns>
+                        </TableView>
+                        <GridPane layoutY="386.0" prefHeight="125.0" prefWidth="890.0">
+                           <columnConstraints>
+                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="454.0" minWidth="10.0" prefWidth="71.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="454.0" minWidth="10.0" prefWidth="338.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="454.0" minWidth="10.0" prefWidth="121.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="482.0" minWidth="10.0" prefWidth="364.0" />
+                           </columnConstraints>
+                           <rowConstraints>
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                           </rowConstraints>
+                           <children>
+                              <Label prefHeight="17.0" prefWidth="58.0" text="Nombre" />
+                              <TextField fx:id="empresa_nombre" prefHeight="25.0" prefWidth="161.0" GridPane.columnIndex="1" />
+                              <Label text="Telefono" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
+                              <TextField fx:id="empresa_telefono" prefHeight="25.0" prefWidth="161.0" GridPane.columnIndex="3" />
+                              <Label text="Correo" GridPane.rowIndex="1" />
+                              <TextField fx:id="empresa_correo" prefHeight="25.0" prefWidth="161.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                              <Label prefHeight="17.0" prefWidth="72.0" text="Responsable" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
+                              <TextField fx:id="empresa_responsable" prefHeight="25.0" prefWidth="169.0" GridPane.columnIndex="3" GridPane.rowIndex="1" />
+                              <Label text="Observaciones" GridPane.rowIndex="2" />
+                              <TextField fx:id="empresa_observaciones" prefHeight="25.0" prefWidth="161.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                           </children>
+                        </GridPane>
+                        <HBox alignment="CENTER" layoutX="5.0" layoutY="501.0" prefHeight="70.0" prefWidth="893.0" spacing="50.0">
+                           <children>
+                              <Button fx:id="empresa_introducir" mnemonicParsing="false" prefHeight="25.0" prefWidth="107.0" text="Introducir" />
+                              <Button fx:id="empresa_borrar" mnemonicParsing="false" prefHeight="25.0" prefWidth="99.0" text="Borrar" />
+                              <Button fx:id="empresa_modificar" mnemonicParsing="false" prefHeight="25.0" prefWidth="105.0" text="Modificar" />
+                           </children>
+                        </HBox>
+                     </children>
+                  </AnchorPane>
+            </content>
+          </Tab>
+            <Tab id="actividades" text="Actividades">
+              <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="415.0" prefWidth="902.0">
+                     <children>
+                        <HBox alignment="CENTER" prefHeight="70.0" prefWidth="893.0" spacing="50.0">
+                           <children>
+                              <Button fx:id="alumno_introducir1" mnemonicParsing="false" prefHeight="25.0" prefWidth="107.0" text="Introducir" />
+                              <Button fx:id="alumno_borrar1" mnemonicParsing="false" prefHeight="25.0" prefWidth="99.0" text="Borrar" />
+                              <Button fx:id="alumno_modificar1" mnemonicParsing="false" prefHeight="25.0" prefWidth="105.0" text="Modificar" />
+                           </children>
+                        </HBox>
+                        <TableView prefHeight="388.0" prefWidth="902.0">
+                          <columns>
+                            <TableColumn prefWidth="114.0" text="Fecha" />
+                            <TableColumn prefWidth="59.0" text="Tipo" />
+                              <TableColumn prefWidth="93.0" text="Total Horas" />
+                              <TableColumn prefWidth="298.0" text="Observaciones" />
+                              <TableColumn minWidth="0.0" prefWidth="337.0" text="Actividad realizada" />
+                          </columns>
+                        </TableView>
+                        <GridPane layoutX="7.0" layoutY="388.0" prefHeight="108.0" prefWidth="890.0">
+                           <columnConstraints>
+                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="454.0" minWidth="10.0" prefWidth="109.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="454.0" minWidth="10.0" prefWidth="298.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="454.0" minWidth="10.0" prefWidth="121.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="482.0" minWidth="10.0" prefWidth="364.0" />
+                           </columnConstraints>
+                           <rowConstraints>
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                           </rowConstraints>
+                           <children>
+                              <TextField fx:id="actividades_nombre" prefHeight="25.0" prefWidth="161.0" GridPane.columnIndex="1" />
+                              <Label text="Tipo" GridPane.columnIndex="2" GridPane.halignment="CENTER" />
+                              <TextField fx:id="actividades_tipo" prefHeight="25.0" prefWidth="161.0" GridPane.columnIndex="3" />
+                              <Label text="Total Horas" GridPane.rowIndex="1" />
+                              <TextField fx:id="actividades_total" prefHeight="25.0" prefWidth="161.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                              <Label prefHeight="17.0" prefWidth="90.0" text="Observaciones" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
+                              <TextField fx:id="actividades_observaciones" prefHeight="25.0" prefWidth="169.0" GridPane.columnIndex="3" GridPane.rowIndex="1" />
+                              <Label text="Actividad realizada" GridPane.rowIndex="2" />
+                              <TextField fx:id="actividades_actividad" prefHeight="25.0" prefWidth="161.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                              <Label text="Fecha" />
+                           </children>
+                        </GridPane>
+                        <HBox alignment="CENTER" layoutX="5.0" layoutY="503.0" prefHeight="47.0" prefWidth="893.0" spacing="50.0">
+                           <children>
+                              <Button fx:id="actividad_introducir" mnemonicParsing="false" prefHeight="25.0" prefWidth="107.0" text="Introducir" />
+                              <Button fx:id="actividad_borrar" mnemonicParsing="false" prefHeight="25.0" prefWidth="99.0" text="Borrar" />
+                              <Button fx:id="actividad_modificar" mnemonicParsing="false" prefHeight="25.0" prefWidth="105.0" text="Modificar" />
+                           </children>
+                        </HBox>
+                     </children>
+                  </AnchorPane>
+              </content>
+            </Tab>
+        </tabs>
+      </TabPane>
+        <Button fx:id="atras" alignment="CENTER" contentDisplay="CENTER" onAction="#switchToPrimary" prefHeight="0.0" prefWidth="97.0" text="Atras" />
+    </children>
+   <padding>
+      <Insets bottom="20.0" left="20.0" right="20.0" />
+   </padding>
+</VBox>
