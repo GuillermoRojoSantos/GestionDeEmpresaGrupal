@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.FlowPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane prefHeight="710.0" prefWidth="1268.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.gestion.PrimaryController">
+    <top>
+        <Label text="Login" BorderPane.alignment="CENTER">
+            <font>
+                <Font size="58.0" />
+            </font>
+        </Label>
+    </top>
+    <center>
+        <VBox prefHeight="516.0" prefWidth="1268.0" BorderPane.alignment="CENTER">
+            <children>
+                <FlowPane prefHeight="35.0" prefWidth="609.0">
+                    <children>
+                        <Label prefHeight="25.0" prefWidth="93.0" text="Usuario">
+                            <font>
+                                <Font size="16.0" />
+                            </font>
+                        </Label>
+                        <TextField id="usuario" fx:id="usuario" prefHeight="25.0" prefWidth="501.0">
+                            <font>
+                                <Font size="16.0" />
+                            </font>
+                        </TextField>
+                    </children>
+                    <padding>
+                        <Insets left="138.0" />
+                    </padding>
+               <VBox.margin>
+                  <Insets left="160.0" top="150.0" />
+               </VBox.margin>
+                </FlowPane>
+                <FlowPane prefHeight="0.0" prefWidth="678.0">
+                    <children>
+                        <Label prefHeight="25.0" prefWidth="92.0" text="Contraseña">
+                            <font>
+                                <Font size="16.0" />
+                            </font>
+                        </Label>
+                        <TextField id="contraseña" fx:id="contraseña" prefHeight="25.0" prefWidth="501.0">
+                            <font>
+                                <Font size="16.0" />
+                            </font>
+                        </TextField>
+                    </children>
+                    <padding>
+                        <Insets left="138.0" />
+                    </padding>
+               <VBox.margin>
+                  <Insets left="160.0" top="75.0" />
+               </VBox.margin>
+                </FlowPane>
+            </children>
+        </VBox>
+    </center>
+   <bottom>
+          <FlowPane alignment="CENTER" prefHeight="280.0" prefWidth="1268.0" BorderPane.alignment="CENTER">
+              <children>
+                  <Button id="aceptar" fx:id="aceptar" onAction="#switchToSecondary" prefHeight="61.0" prefWidth="129.0" text="Aceptar">
+                      <FlowPane.margin>
+                          <Insets bottom="40.0" right="253.0" />
+                      </FlowPane.margin>
+                  </Button>
+                  <Button id="cancelar" fx:id="cancelar" mnemonicParsing="false" prefHeight="61.0" prefWidth="129.0" text="Cancelar">
+               <FlowPane.margin>
+                  <Insets bottom="40.0" />
+               </FlowPane.margin>
+            </Button>
+              </children>
+         <BorderPane.margin>
+            <Insets bottom="40.0" />
+         </BorderPane.margin>
+          </FlowPane>
+   </bottom>
+</BorderPane>

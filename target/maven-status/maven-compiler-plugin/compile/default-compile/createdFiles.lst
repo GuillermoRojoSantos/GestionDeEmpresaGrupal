@@ -1,0 +1,17 @@
+com\mycompany\gestion\App.class
+model\Profesor.class
+dao\ProfesorDAOMySQL.class
+dao\TareaDAOMySQL.class
+com\mycompany\gestion\ThirdaryController.class
+model\Tarea.class
+com\mycompany\gestion\SecondaryController.class
+module-info.class
+dao\AlumnoDAO.class
+dao\TareaDAO.class
+model\Empresa.class
+dao\AlumnoDAOMySQL.class
+dao\ProfesorDAO.class
+model\Alumno.class
+com\mycompany\gestion\PrimaryController.class
+dao\EmpresaDAOMySQL.class
+dao\EmpresaDAO.class

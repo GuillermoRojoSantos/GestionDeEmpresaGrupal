@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<BorderPane minHeight="710.0" minWidth="936.0" prefHeight="710.0" prefWidth="1268.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.gestion.ThirdaryController">
+    <top>
+        <Label text="Cuenta de alumno" BorderPane.alignment="CENTER">
+            <font>
+                <Font size="25.0" />
+            </font>
+        </Label>
+    </top>
+    <center>
+        <TabPane prefHeight="544.0" prefWidth="853.0" tabClosingPolicy="UNAVAILABLE" BorderPane.alignment="CENTER">
+            <tabs>
+                <Tab fx:id="listaTareas" text="Tareas">
+                    <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                            <children>
+                                <TableView fx:id="tablaTareas" onMouseClicked="#selectTarea" prefHeight="320.0" prefWidth="1268.0">
+                                    <columns>
+                                        <TableColumn fx:id="tareaFecha" editable="false" prefWidth="106.0" text="Fecha" />
+                                        <TableColumn fx:id="tareaTipo" editable="false" prefWidth="152.7272491455078" text="Tipo" />
+                                        <TableColumn fx:id="tareaTotal" editable="false" prefWidth="165.81817626953125" text="Total" />
+                                        <TableColumn fx:id="tareaActividad" editable="false" prefWidth="304.5817565917969" text="Actividad" />
+                                        <TableColumn fx:id="tareaObservaciones" editable="false" prefWidth="535.8544921875" text="Observaciones" />
+                                    </columns>
+                                </TableView>
+                                <GridPane layoutX="14.0" layoutY="330.0" prefHeight="175.0" prefWidth="1251.0" vgap="20.0">
+                                    <columnConstraints>
+                                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="201.0" minWidth="0.0" prefWidth="84.0" />
+                                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="414.0" minWidth="10.0" prefWidth="277.0" />
+                                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="325.0" minWidth="10.0" prefWidth="60.0" />
+                                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="416.0" minWidth="10.0" prefWidth="397.0" />
+                                    </columnConstraints>
+                                    <rowConstraints>
+                                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                    </rowConstraints>
+                                    <children>
+                                        <Label text="Fecha" />
+                                        <Label text="Tipo" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
+                                        <Label text="Total" GridPane.rowIndex="1" />
+                                        <Label text="Actividad" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
+                                        <Label text="Observaciones" GridPane.rowIndex="2" />
+                                        <TextField fx:id="tarea_fecha" prefHeight="25.0" prefWidth="288.0" GridPane.columnIndex="1" />
+                                        <TextField fx:id="tarea_total" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                                        <TextField fx:id="tarea_observaciones" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                                        <TextField fx:id="tarea_tipo" GridPane.columnIndex="3" />
+                                        <TextField fx:id="tarea_actividad" GridPane.columnIndex="3" GridPane.rowIndex="1" />
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Horas Dual" GridPane.rowIndex="3" />
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Horas FCT" GridPane.rowIndex="4" />
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Horas Dual Restantes" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="3" />
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Horas FCT Restantes" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="4" />
+                              <TextField fx:id="txtDual" alignment="CENTER" editable="false" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                              <TextField fx:id="txtFCT" alignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                              <TextField fx:id="txtDualRes" alignment="CENTER" GridPane.columnIndex="3" GridPane.rowIndex="3" />
+                              <TextField fx:id="txtFCTRest" alignment="CENTER" GridPane.columnIndex="3" GridPane.rowIndex="4" />
+                                    </children>
+                                </GridPane>
+                                <HBox alignment="CENTER" layoutX="5.0" layoutY="505.0" prefHeight="100.0" prefWidth="1258.0" spacing="20.0">
+                                    <children>
+                                        <Button fx:id="tarea_introducir" mnemonicParsing="false" onAction="#añadirTarea" prefHeight="25.0" prefWidth="117.0" text="Introducir" />
+                                        <Button fx:id="tarea_modificar" mnemonicParsing="false" onAction="#modificarTarea" prefHeight="25.0" prefWidth="117.0" text="Modificar" />
+                                        <Button fx:id="tarea_borrar" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#modificarEliminar" prefHeight="25.0" prefWidth="117.0" text="Eliminar" />
+                                    </children>
+                                </HBox>
+                            </children>
+                        </AnchorPane>
+                    </content>
+                </Tab>
+                <Tab fx:id="listaEmpresa" text="Empresa">
+                    <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                            <children>
+                                <TableView fx:id="tablaEmpresa" layoutX="-1.0" prefHeight="452.0" prefWidth="1268.0">
+                                    <columns>
+                                        <TableColumn fx:id="empresaNombre" editable="false" prefWidth="235.63631904125214" sortable="false" text="Nombre" />
+                                        <TableColumn fx:id="empresaTelefono" editable="false" prefWidth="194.61817932128906" sortable="false" text="Telefono" />
+                                        <TableColumn fx:id="empresaCorreo" editable="false" prefWidth="205.09085083007812" sortable="false" text="Correo" />
+                                        <TableColumn fx:id="empresaResponsable" editable="false" prefWidth="253.963623046875" sortable="false" text="Responsable" />
+                                        <TableColumn fx:id="empresaObservaciones" editable="false" prefWidth="376.1453857421875" sortable="false" text="Observaciones" />
+                                    </columns>
+                                </TableView>
+                            </children>
+                        </AnchorPane>
+                    </content>
+                </Tab>
+                <Tab fx:id="listaProfesor" text="Profesor">
+                    <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                            <children>
+                                <TableView fx:id="tablaProfesor" prefHeight="451.0" prefWidth="1268.0">
+                                    <columns>
+                                        <TableColumn fx:id="profesorNombre" editable="false" prefWidth="355.19999396800995" sortable="false" text="Nombre" />
+                                        <TableColumn fx:id="profesorApellido" editable="false" prefWidth="378.7635803222656" sortable="false" text="Apellido" />
+                                        <TableColumn fx:id="profesorCorreo" editable="false" prefWidth="530.6181640625" sortable="false" text="Correo electronico" />
+                                    </columns>
+                                </TableView>
+                            </children>
+                        </AnchorPane>
+                    </content>
+                </Tab>
+            </tabs>
+        </TabPane>
+    </center>
+    <bottom>
+        <Button fx:id="atras" mnemonicParsing="false" onAction="#switchToPrimary" prefHeight="25.0" prefWidth="112.0" text="Atras" BorderPane.alignment="CENTER">
+         <BorderPane.margin>
+            <Insets bottom="20.0" />
+         </BorderPane.margin></Button>
+    </bottom>
+</BorderPane>
